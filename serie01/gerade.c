@@ -17,7 +17,7 @@ int main() {
     printf("q = ");
     scanf("%lf", &q);
 
-    printf("Zero is at (%f,0).\n", q / m);
+    printf("Zero is at (%f,0).\n", -q / m);
 
     return 0;
 }

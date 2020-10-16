@@ -31,7 +31,7 @@ int main() {
         return 1;
     }
 
-    printf("The area is %f.\n", 2 * (B - b) * h + b * h);
+    printf("The area is %f.\n", h * (B + b) / 2);
 
     return 0;
 }
