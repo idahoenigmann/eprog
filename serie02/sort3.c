@@ -22,26 +22,26 @@ int main() {
             if (y > z) {
                 printf("%f, ", y);
                 printf("%f\n", z);
-            } else {
+            } else { // z > y
                 printf("%f, ", z);
                 printf("%f\n", y);
             }
-        } else {
+        } else { // z > x
             printf("%f, ", z);
             printf("%f, ", x);
             printf("%f\n", y);
         }
-    } else {
+    } else { // y > x
         if (y > z) {
             printf("%f, ", y);
             if (x > z) {
                 printf("%f, ", x);
                 printf("%f\n", z);
-            } else {
+            } else { // z > x
                 printf("%f, ", z);
                 printf("%f\n", x);
             }
-        } else {
+        } else { // z > y
             printf("%f, ", z);
             printf("%f, ", y);
             printf("%f\n", x);
