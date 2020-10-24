@@ -5,11 +5,11 @@
 #include <stdio.h>
 
 void hanoi(int m, int i, int j) {
-    if (m == 0) {
+    if (m == 0)
         return;
-    }
 
     // find auxiliary rode
+    /*
     int k = 1;
     for (int l=1; l <= 3; l++) {
         if (i != l && j != l) {
@@ -17,9 +17,16 @@ void hanoi(int m, int i, int j) {
             break;
         }
     }
+     */
+
+    // i=1; j=2; 1 + 2 = 3 : 3 : 6 - 3
+    // i=1; j=3; 1 + 3 = 4 : 2 : 6 - 4
+    // i=2; j=3; 2 + 3 = 5 : 1 : 6 - 5
+
+    int k = 6 - (i + j);
 
     hanoi(m - 1, i, k);
-    printf("Move a disk from Rode %d to Rode %d.\n", i, j);
+    printf("Move a disk from rode %d to rode %d.\n", i, j);
     hanoi(m - 1, k, j);
 }
 
