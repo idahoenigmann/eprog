@@ -5,9 +5,10 @@
 #include <stdio.h>
 
 int division(int m, int n) {
-    if (m <= n) {
-        return 1;
+    if (m < n) {
+        return 0;
     }
+
     return 1 + division(m - n, n);
 }
 

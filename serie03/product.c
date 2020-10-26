@@ -6,10 +6,12 @@
 
 int product(int x, int y) {
     int res = 0;
+
     while (y > 0) {
         res = res + x;
         y--;
     }
+
     return res;
 }
 

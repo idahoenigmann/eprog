@@ -8,7 +8,7 @@ void hanoi(int m, int i, int j) {
     if (m == 0)
         return;
 
-    // find auxiliary rode
+    // find auxiliary rod
     /*
     int k = 1;
     for (int l=1; l <= 3; l++) {
@@ -26,7 +26,7 @@ void hanoi(int m, int i, int j) {
     int k = 6 - (i + j);
 
     hanoi(m - 1, i, k);
-    printf("Move a disk from rode %d to rode %d.\n", i, j);
+    printf("Move a disk from rod %d to rod %d.\n", i, j);
     hanoi(m - 1, k, j);
 }
 

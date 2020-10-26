@@ -6,6 +6,7 @@
 
 double scanfpositive() {
     double x = 0;
+
     do {
         printf("Please enter a positive number: ");
         scanf("%lf", &x);
