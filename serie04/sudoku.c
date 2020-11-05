@@ -68,3 +68,7 @@ int main() {
     checkSudoku(x);
     return 0;
 }
+
+/* Test:
+ * using the above test cases.
+ */

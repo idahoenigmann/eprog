@@ -47,3 +47,7 @@ int main() {
     cross(n);
     return 0;
 }
+
+/* Test:
+ * 6, 5, 1, 3
+ */

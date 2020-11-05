@@ -66,5 +66,5 @@ int main() {
  * 1, 1 => 1
  * 5, 3 => 10
  * 10, 4 => 210
- * 20, 4 does not work, because factorial(20) is to large for a integer. :-(
+ * 20, 4 does not work, because factorial(20) is to large for an integer. :-(
  * */
