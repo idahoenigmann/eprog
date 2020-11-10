@@ -65,5 +65,7 @@ int main() {
 
     papercut(n);
 
+    free(prefix);
+
     return 0;
 }
