@@ -31,6 +31,6 @@ int main() {
  * sum from 1 to n of (3) = 3 * n
  * O = n
  *
- * 3 sec for n = 10^3
- * how many sec for n = 10^4: 4 sec
+ * 3 sec for n = 10^3=1000
+ * how many sec for n = 10^4=10000: 30 sec
  * */

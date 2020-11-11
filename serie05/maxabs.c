@@ -37,6 +37,6 @@ int main() {
  * sum from 1 to n (1+1+1+1+1+1) = n*6
  * O = n
  *
- * 3 sec for n = 10^3
- * how many sec for n = 2 * 10^4? 8 sec
+ * 3 sec for n = 10^3=1000
+ * how many sec for n = 2 * 10^4=10000? 60 sec
  */
