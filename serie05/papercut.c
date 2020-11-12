@@ -8,7 +8,7 @@
 int* prefix;
 
 void papercut(int n) {
-    //printf("Called with n=%d\n", n);
+    //TEST printf("Called with n=%d\n", n);
     if (n <= 0) {
         int i = 0;
         while (prefix[i] != 0) {
@@ -37,6 +37,9 @@ void papercut(int n) {
         while (prefix[i + 1] != 0) {
             i++;
         }
+        // alternative implementation for c nerds
+        //for(i=0;prefix[i+1]!=0;i++);
+
         prefix[i] = 2;
         /* Call recursion. */
         papercut(n - 2);
@@ -60,7 +63,7 @@ int main() {
     printf("Please enter a number for n=");
     scanf("%d", &n);
 
-    prefix = (int*) malloc(n * sizeof(int));
+    prefix = (int*) malloc((n+1) * sizeof(int));
     prefix[0] = 0;
 
     papercut(n);
