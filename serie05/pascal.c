@@ -35,3 +35,10 @@ int main() {
 
     return 0;
 }
+
+/* Tested:
+ * 5
+ * 1
+ * 3
+ * 0
+ * */

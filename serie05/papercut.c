@@ -76,3 +76,12 @@ int main() {
 
     return 0;
 }
+
+/* Tested with:
+ * 5
+ * 4
+ * 1
+ * 0
+ * 3
+ * -1
+ * */
