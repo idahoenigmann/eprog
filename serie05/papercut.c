@@ -64,6 +64,10 @@ int main() {
     scanf("%d", &n);
 
     prefix = (int*) malloc((n+1) * sizeof(int));
+    if (prefix == NULL) {
+        return 1;
+    }
+
     prefix[0] = 0;
 
     papercut(n);
