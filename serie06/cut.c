@@ -5,33 +5,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void cut(double* x, int n, double cmin, double cmax) {
+void cut(double* x, int* n, double cmin, double cmax) {
     int idx=0;
-    for (int i=0; i < n; i++) {
+    for (int i=0; i < *n; i++) {
         if (x[i] >= cmin && x[i] <= cmax) {
             x[idx] = x[i];
             idx++;
         }
     }
-    x = realloc(x,idx);
+    x = realloc(x,idx*sizeof(double));
+    *n = idx;
 }
 
 int main() {
+    printf("Removes all values smaller or larger than a given number from the vector of size n.\n");
     double* arr;
-    arr = malloc(8*sizeof(double));
+    int n = 0;
+    double min = 0;
+    double max = 0;
 
-    for (int i=0; i < 8; i++) {
-        arr[i] = i * 2 - 3;
+    printf("Please enter a value for n: ");
+    scanf("%d",&n);
+
+    printf("Please enter a value for the minimum: ");
+    scanf("%lf", &min);
+
+    printf("Please enter a value for the maximun: ");
+    scanf("%lf", &max);
+
+    arr = malloc(n*sizeof(double));
+
+    for (int i=0; i < n; i++) {
+        printf("Please enter a value for x[%d]: ", i);
+        scanf("%lf",arr+i);
     }
 
-    for (int i=0; i < 8; i++) {
+    for (int i=0; i < n; i++) {
         printf("%f, ",arr[i]);
     }
     printf("\n");
 
-    cut(arr, 8, 0, 10);
+    cut(arr, &n, min, max);
 
-    for (int i=0; i < 8; i++) {
+    for (int i=0; i < n; i++) {
         printf("%f, ",arr[i]);
     }
     printf("\n");
