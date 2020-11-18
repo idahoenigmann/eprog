@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void cut(double* x, int* n, double cmin, double cmax) {
+double* cut(double* x, int* n, double cmin, double cmax) {
     int idx=0;
     for (int i=0; i < *n; i++) {
         if (x[i] >= cmin && x[i] <= cmax) {
@@ -15,6 +15,7 @@ void cut(double* x, int* n, double cmin, double cmax) {
     }
     x = realloc(x,idx*sizeof(double));
     *n = idx;
+    return x;
 }
 
 int main() {
@@ -45,7 +46,7 @@ int main() {
     }
     printf("\n");
 
-    cut(arr, &n, min, max);
+    arr = cut(arr, &n, min, max);
 
     for (int i=0; i < n; i++) {
         printf("%f, ",arr[i]);

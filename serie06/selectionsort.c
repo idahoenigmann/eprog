@@ -53,3 +53,7 @@ int main() {
     free(arr);
     return 0;
 }
+
+/* computational complexity:
+ * sum from 0 to n (sum(i to n(3)+3) = n*n*3+3 = =O(n^2)
+ * */

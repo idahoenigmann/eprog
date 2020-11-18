@@ -49,3 +49,7 @@ int main() {
     free(arr);
     return 0;
 }
+
+/* computational complexity:
+ * sum from 1 to n (sum(0 to i(3))
+ * */
