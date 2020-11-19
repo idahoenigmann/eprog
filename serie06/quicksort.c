@@ -22,6 +22,10 @@ int partition(double* x, int start, int end) {
     return i+1;
 }
 
+/* Computational complexity:
+ * 1+ sum from start to end(4) + 4 = 5 + (end - start)*4
+ */
+
 void quickSort_(double* x, int start, int end) {
     if (start < end) {
         int p = partition(x, start, end);
@@ -29,6 +33,10 @@ void quickSort_(double* x, int start, int end) {
         quickSort_(x, p + 1, end);
     }
 }
+
+/* computational complexity:
+ * n * (end - start)*4 + 3 ~= n^2
+ */
 
 void quickSort(double* x, int n) {
     quickSort_(x, 0, n - 1);

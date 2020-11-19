@@ -51,5 +51,5 @@ int main() {
 }
 
 /* computational complexity:
- * sum from 1 to n (sum(0 to i(3))
+ * sum from 1 to n (sum(0 to i(3)) = n*(n/2)*3 ~= n^2
  * */

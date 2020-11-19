@@ -49,3 +49,7 @@ int main() {
     free(arr);
     return 0;
 }
+
+/* Computational complexity:
+ * sum(0 to n(sum(0 to n(6))) ~= n^2
+ */

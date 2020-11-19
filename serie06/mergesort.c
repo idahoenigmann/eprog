@@ -6,50 +6,76 @@
 #include <stdlib.h>
 #include <math.h>
 
-double* merge(double* x, double* y, int len_x, int len_y) {
-    double* res = malloc(sizeof(double)*(len_x+len_y));
+void merge(double* arr_left, int arr_left_len, double* arr_right, int arr_right_len, int* ret) {
+    int idx_left = 0;
+    int idx_right = 0;
+    int idx = 0;
 
-    int idx_x = 0;
-    int idx_y = 0;
-    int idx_res = 0;
-
-    while (idx_x < len_x || idx_y < len_y) {
-        if (x[idx_x] < y[idx_y] && idx_x < len_x) {
-            res[idx_res] = x[idx_x];
-            idx_x++;
+    while (idx_left < arr_left_len && idx_right < arr_right_len) {
+        if (arr_left[idx_left] <= arr_right[idx_right]) {
+            ret[idx] = arr_left[idx_left];
+            idx += 1;
+            idx_left += 1;
         } else {
-            res[idx_res] = y[idx_y];
-            idx_y++;
+            ret[idx] = arr_right[idx_right];
+            idx +=1;
+            idx_right += 1;
         }
-        idx_res++;
     }
 
-    free(x);
-    free(y);
-    return res;
+    // copy the rest
+    if (idx_left < arr_left_len) {
+        for (int i = idx_left; i < arr_left_len; ++i) {
+            ret[idx] = arr_left[i];
+            idx += 1;
+        }
+    } else if (idx_right < arr_right_len) {
+        for (int i = idx_right; i < arr_right_len; ++i) {
+            ret[idx] = arr_right[i];
+            idx += 1;
+        }
+    }
 }
 
-void mergeSort(double* x, int n) {
-    if (n == 1) {
-        return;
-    } else if (n == 2) {
-        if (x[0] > x[1]) {
-            double tmp = x[1];
-            x[1] = x[0];
-            x[0] = tmp;
-        }
+/*
+ * Computational complexity:
+ * sum from 0 to arr_left_len + arr_right_len(4) = len*4
+ */
+
+void mergeSort_(double* arr, int arr_len, int* tmp) {
+    int middle = arr_len / 2;
+    if (middle == 0) {
         return;
     }
-    int len_x = (int)(n/2.0);
 
+    double* left = arr;
+    int left_len = middle;
 
+    double* right = arr + middle;
+    int right_len = arr_len - middle;
 
-    mergeSort(x,len_x);
-    mergeSort(x+len_x,n-len_x);
-    double* merged = merge(x,x+len_x,len_x,n-len_x);
-    for (int i=0; i < n; i++) {
-        x[i] = merged[i];
+    mergeSort_(left, left_len, tmp);
+    mergeSort_(right, right_len, tmp);
+
+    merge(left, left_len, right, right_len, tmp);
+
+    // copy result to original array
+    for (int i = 0; i < arr_len; ++i) {
+        arr[i] = tmp[i];
     }
+}
+
+/*
+ * Computational complexity:
+ * log n*(3+len*4+sum from 0 to len(1)) = log n*(len*5+3) ~= log n * n
+ */
+
+double* mergeSort(double* x, int n) {
+    int* tmp = malloc(n*sizeof(double));
+    mergeSort_(x, n, tmp);
+    free(tmp);
+
+    return x;
 }
 
 int main() {
@@ -73,7 +99,7 @@ int main() {
         printf("%f, ", arr[i]);
     }
 
-    mergeSort(arr, n);
+    arr = mergeSort(arr, n);
 
     printf("\nSorted vector:\n");
     for(int i=0; i < n; i++) {
