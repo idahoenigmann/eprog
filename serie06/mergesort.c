@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void merge(double* arr_left, int arr_left_len, double* arr_right, int arr_right_len, int* ret) {
+void merge(double* arr_left, int arr_left_len, double* arr_right, int arr_right_len, double* ret) {
     int idx_left = 0;
     int idx_right = 0;
     int idx = 0;
@@ -42,7 +42,7 @@ void merge(double* arr_left, int arr_left_len, double* arr_right, int arr_right_
  * sum from 0 to arr_left_len + arr_right_len(4) = len*4
  */
 
-void mergeSort_(double* arr, int arr_len, int* tmp) {
+void mergeSort_(double* arr, int arr_len, double* tmp) {
     int middle = arr_len / 2;
     if (middle == 0) {
         return;
@@ -71,7 +71,7 @@ void mergeSort_(double* arr, int arr_len, int* tmp) {
  */
 
 double* mergeSort(double* x, int n) {
-    int* tmp = malloc(n*sizeof(double));
+    double* tmp = malloc(n*sizeof(double));
     mergeSort_(x, n, tmp);
     free(tmp);
 

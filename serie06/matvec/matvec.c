@@ -83,6 +83,7 @@ double* freeMatrix(double* matrix) {
     return NULL;
 }
 
+/* Remark: does not work as expected, because the original values do not match the new ones. */
 double* reallocMatrix(double* matrix, int m, int n, int mnew, int nnew) {
     int j = 0;
     assert(matrix != NULL);
