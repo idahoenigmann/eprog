@@ -68,3 +68,12 @@ int main() {
 
     return 0;
 }
+
+/* Tested:
+ * abC, Acb
+ * Elvis, lives
+ * asdf-jkl, ad-jlkfs
+ * abc, def
+ * abcdef, def
+ * abc, abcdef
+ */

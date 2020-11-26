@@ -63,3 +63,10 @@ int main() {
 
     return 0;
 }
+
+/* Tested:
+ * x = 0; h0 = 1; tau = 0.1
+ * x = 10; h0 = 1; tau = 0.1
+ * x = 0; h0 = 10; tau = 0.1
+ * x = 0; h0 = 1; tau = 1
+ */
