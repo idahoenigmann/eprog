@@ -8,7 +8,7 @@
 #include "../datum/datum.h"
 #include "address.h"
 
-typedef struct _Person_ {
+typedef struct Person_ {
     char* firstname;
     char* surname;
     Address* address;

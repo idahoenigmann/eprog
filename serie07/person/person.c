@@ -7,8 +7,8 @@
 Person* newPerson(char* firstname, char* surname, Address* address, Date* birthday) {
     Person* person = malloc(sizeof(Person));
 
-    person->firstname = malloc(sizeof(char) * strlen(firstname));
-    person->surname = malloc(sizeof(char) * strlen(surname));
+    person->firstname = malloc(sizeof(char) * (strlen(firstname) + 1));
+    person->surname = malloc(sizeof(char) * (strlen(surname) + 1));
     person->address = malloc(sizeof(Address));
     person->birthday = malloc(sizeof(Date));
 
@@ -31,19 +31,22 @@ Person* delPerson(Person* person) {
 }
 
 void setFirstname(Person* person, char* firstname) {
-    person->firstname = realloc(person, sizeof(char) * strlen(firstname));
+    person->firstname = realloc(person->firstname, sizeof(char) * (strlen(firstname) + 1));
 
     person->firstname = strcpy(person->firstname, firstname);
 }
 
 void setSurname(Person* person, char* surname) {
-    person->surname = realloc(person, sizeof(char) * strlen(surname));
+    person->surname = realloc(person->surname, sizeof(char) * (strlen(surname) + 1));
 
     person->surname = strcpy(person->surname, surname);
 }
 
 void setAddress(Person* person, Address* address) {
-    person->address = address;
+    person->address->street = address->street;
+    person->address->number = address->number;
+    person->address->city = address->city;
+    person->address->zip = address->zip;
 }
 
 void setBirthday(Person* person, Date* birthday) {
@@ -54,21 +57,55 @@ void setBirthday(Person* person, Date* birthday) {
 
 char* getFirstname(Person* person){
     char* res;
-    res = malloc(sizeof(char) * strlen(person->firstname));
+    res = malloc(sizeof(char) * (strlen(person->firstname) + 1));
     strcpy(res, person->firstname);
     return res;
 }
 
 char* getSurname(Person* person) {
-    return person->surname;
+    char* res;
+    res = malloc(sizeof(char) * (strlen(person->surname) + 1));
+    strcpy(res, person->surname);
+    return res;
 }
 
 Address* getAddress(Person* person) {
-    return person->address;
+    Address* res;
+    res = malloc(sizeof(Address));
+    res->city = person->address->city;
+    res->number = person->address->number;
+    res->street = person->address->street;
+    res->zip = person->address->zip;
+    return res;
 }
 
 Date* getBirthday(Person* person) {
-    return person->birthday;
+    Date* res;
+    res = malloc(sizeof(Date));
+    res->day = person->birthday->day;
+    res->month = person->birthday->month;
+    res->year = person->birthday->year;
+    return res;
 }
 
-Person* whoIsOlder(Person* a, Person* b);
+Person* whoIsOlder(Person* a, Person* b) {
+    if (a->birthday->year < b->birthday->year) {
+        return a;
+    } else if (a->birthday->year > b->birthday->year) {
+        return b;
+    } else {
+        if (a->birthday->month < b->birthday->month) {
+            return a;
+        } else if (a->birthday->month > b->birthday->month) {
+            return b;
+        } else {
+            if (a->birthday->day < b->birthday->day) {
+                return a;
+            } else if (a->birthday->day > b->birthday->day) {
+                return b;
+            } else {    // if both persons share their birthday person a is returned.
+                return a;
+            }
+        }
+    }
+}

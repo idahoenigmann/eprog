@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct _Address_ {
+typedef struct Address_ {
     char* street;
     char* number;
     char* city;
