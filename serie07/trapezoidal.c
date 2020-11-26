@@ -6,29 +6,27 @@
 #include <math.h>
 #include <assert.h>
 
-// :-(
-
 double f(double x) {
-    return 5;
+    return 5 * x;
 }
 
 double trapezoidalRule(double (*f)(double), double a, double b, double tau) {
-    int n = 0;
-    double h = (b - a) / n;
-    double i = 0;
+    int n = 1;
+    double h = 0;
+    double i = 1e38;
     double i_prev = 0;
 
     assert(tau > 0);
 
     while (1) {
-
+        n++;
+        h = (b - a) / n;
         i_prev = i;
-        i = f(a);
+        i = f(a) + f(b);
 
-        for (int j = 1; j < n - 1; ++j) {
-            i += f(a + j * h) + f(b);
+        for (int j = 1; j <= n - 1; ++j) {
+            i += 2 * (f(a + j * h));
         }
-        i *= 2;
         i *= h / 2;
 
         if (fabs(i) <= tau) {
@@ -66,3 +64,7 @@ int main() {
 
     return 0;
 }
+
+/* Tested:
+ *
+ */
