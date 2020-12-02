@@ -5,6 +5,8 @@
 #ifndef EPROG_PERSON_H
 #define EPROG_PERSON_H
 
+#include <assert.h>
+
 #include "../datum/datum.h"
 #include "address.h"
 

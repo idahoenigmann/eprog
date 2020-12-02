@@ -21,6 +21,8 @@ Person* newPerson(char* firstname, char* surname, Address* address, Date* birthd
 }
 
 Person* delPerson(Person* person) {
+    assert(person != NULL);
+
     free(person->firstname);
     free(person->surname);
     person->address = delAddress(person->address);

@@ -18,4 +18,7 @@ int main() {
     Person* mickey = newPerson("Mickey", "Mouse", address_mickey, birthday_mickey);
 
     printf("%s is older.\n",whoIsOlder(mickey, donald)->firstname);
+
+    delPerson(donald);
+    delPerson(mickey);
 }

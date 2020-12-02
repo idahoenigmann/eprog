@@ -22,6 +22,7 @@ Address* newAddress(char* street, char* number, char* city, char* zip) {
 }
 
 Address* delAddress(Address* address) {
+    assert(address != NULL);
     free(address->street);
     free(address->number);
     free(address->city);

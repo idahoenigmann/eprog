@@ -6,8 +6,6 @@
 #include <math.h>
 #include <assert.h>
 
-// ? what should f, fprime look like?
-
 double f(double x) {
     return 2 * x * x + 4 * x;
 }
