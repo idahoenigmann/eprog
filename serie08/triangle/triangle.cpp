@@ -49,7 +49,7 @@ bool Triangle::isEquilateral() {
     // length between point z and x
     double len_c = sqrt((z[0] - x[0]) * (z[0] - x[0]) +
                         (z[1] - x[1]) * (z[1] - x[1]));
-    if (len_a - len_b < accuracy && len_b - len_c < accuracy) {
+    if (fabs(len_a - len_b) < accuracy && fabs(len_b - len_c) < accuracy) {
         return true;
     }
     return false;

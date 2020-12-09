@@ -12,9 +12,9 @@ using std::noboolalpha;
 
 int main() {
     Triangle triangle;
-    triangle.setX(0.0, 1.0);
-    triangle.setY(0.0, 0.5);
-    triangle.setZ(0.0, -0.5);
+    triangle.setX(0.0, 0.0);
+    triangle.setY(1.0, 0.0);
+    triangle.setZ(0.5, 0.866);
 
     cout << "Triangle perimeter: " << triangle.getPerimeter() << endl;
     cout << "Is triangle equilateral: " << boolalpha << triangle.isEquilateral() << noboolalpha << endl;
