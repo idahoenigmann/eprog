@@ -36,12 +36,10 @@ IntVector::IntVector(int number) {
         throw logic_error("Sieve of Eratosthenes only works for numbers bigger than 1.");
     }
 
-    cout << "help0" << endl;
-
     int* tmp = new int[number - 1];
     int cnt_removed{0};
-    for (int i=1; i < number - 1; i++) {
-        tmp[i] = i+1;
+    for (int i=0; i < number - 1; i++) {
+        tmp[i] = i+2;
     }
 
     for (int i=0; i < number - 1; i++) {
@@ -53,18 +51,14 @@ IntVector::IntVector(int number) {
                 continue;
             }
             if (tmp[j] % tmp[i] == 0 && tmp[j] != tmp[i]) {
-                cout << "removing: " << tmp[j] << "(" << tmp[i] << ")" << endl;
                 tmp[j] = -1;
                 cnt_removed++;
             }
         }
     }
-    cout << "hlelp: " << number - 1 - cnt_removed << endl;
 
     int idx = 0;
     data = new int[number - 1 - cnt_removed];
-
-    cout << "help2" << endl;
 
     length = number - 1 - cnt_removed;
 

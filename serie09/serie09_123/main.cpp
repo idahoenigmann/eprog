@@ -10,6 +10,11 @@ int main() {
     {
         IntVector vector;
         cout << vector.getLength() << endl;
+        try {
+            vector.setCoefficient(0, 1);
+        } catch (logic_error &error) {
+            cout << error.what() << endl;
+        }
     }
 
     {
@@ -27,7 +32,7 @@ int main() {
 
     {
         IntVector vector = IntVector(42);
-        cout << "prime factors of 42: ";
+        cout << "prime numbers <= 42: ";
         for (int i=0; i < vector.getLength(); i++) {
             cout << vector.getCoefficient(i) << ", ";
         }
