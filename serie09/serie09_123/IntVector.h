@@ -6,7 +6,6 @@
 #define SERIE09_123_INTVECTOR_H
 
 #include <stdexcept>
-#include <iostream>
 
 class IntVector {
 public:

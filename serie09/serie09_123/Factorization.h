@@ -5,6 +5,8 @@
 #ifndef SERIE09_123_FACTORIZATION_H
 #define SERIE09_123_FACTORIZATION_H
 
+#include <stdexcept>
+
 #include "IntVector.h"
 
 class Factorization {
@@ -14,6 +16,9 @@ public:
     ~Factorization();
     unsigned int recomposeInteger();
     void setNumber(unsigned int number);
+    unsigned int getPrimeFactorCnt();
+    unsigned int getPrimeFactor(int idx);
+    unsigned int getMultiplicity(int idx);
 private:
     unsigned int cnt_prime_factors = 0;
     unsigned int* prime_factors = nullptr;
