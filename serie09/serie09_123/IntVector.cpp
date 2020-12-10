@@ -9,7 +9,7 @@ using namespace std;
 IntVector::IntVector(unsigned int length, int value) {
     data = new int[length];
     this->length = length;
-    for(int i=0; i < length; i++) {
+    for(int i=0; i < (int)length; i++) {
         data[i] = value;
     }
 }

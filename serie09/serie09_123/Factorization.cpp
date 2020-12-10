@@ -23,8 +23,8 @@ Factorization::~Factorization() {
 unsigned int Factorization::recomposeInteger() {
     unsigned int acc = 1;
 
-    for (int i = 0; i < cnt_prime_factors; i++) {
-        for (int j = 0; j < multiplicities[i]; ++j) {
+    for (int i = 0; i < (int)cnt_prime_factors; i++) {
+        for (int j = 0; j < (int)multiplicities[i]; ++j) {
             acc *= prime_factors[i];
         }
     }
@@ -43,7 +43,7 @@ void Factorization::setNumber(unsigned int number) {
     int *prime_factors_tmp = new int[prime_numbers.getLength()];
     int *multiplicity_tmp = new int[prime_numbers.getLength()];
 
-    for (int i = 0; i < prime_numbers.getLength(); i++) {
+    for (int i = 0; i < (int)prime_numbers.getLength(); i++) {
         int curr_prime_factor = prime_numbers.getCoefficient(i);
         if (number % curr_prime_factor == 0) {
             prime_factors_tmp[idx] = curr_prime_factor;
@@ -81,7 +81,7 @@ unsigned int Factorization::getPrimeFactorCnt() {
 
 
 unsigned int Factorization::getPrimeFactor(int idx) {
-    if (idx >= cnt_prime_factors) {
+    if (idx >= (int)cnt_prime_factors) {
         throw logic_error("Index out of bounds.");
     }
     return prime_factors[idx];
@@ -89,7 +89,7 @@ unsigned int Factorization::getPrimeFactor(int idx) {
 
 
 unsigned int Factorization::getMultiplicity(int idx) {
-    if (idx >= cnt_prime_factors) {
+    if (idx >= (int)cnt_prime_factors) {
         throw logic_error("Index out of bounds.");
     }
     return multiplicities[idx];
