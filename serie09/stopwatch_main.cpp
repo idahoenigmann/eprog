@@ -26,3 +26,5 @@ int main() {
 
     return 0;
 }
+
+/* Computes the partial sum of the harmonic sequence. */
