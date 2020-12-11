@@ -20,7 +20,6 @@ Fraction::Fraction(int numerator, int denominator) {
     }
 }
 
-/*TODO: fix me!!!!*/
 void Fraction::reduce() {
     int gcd_num_denom = gcd(numerator, (int) denominator);
     numerator = numerator / gcd_num_denom;

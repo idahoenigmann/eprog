@@ -15,7 +15,7 @@ int gcd(int a, int b) {
     Factorization a_factorization = Factorization(a);
     Factorization b_factorization = Factorization(b);
 
-    // Iterate from back to front, returning if found.
+    // Iterate from back to front, adding prime factor if found.
     for (int i = (int) (a_factorization.getPrimeFactorCnt()) - 1; i >= 0; --i) {
         unsigned int current_prime_factor_a = a_factorization.getPrimeFactor(i);
 
