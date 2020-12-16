@@ -26,8 +26,8 @@ Matrix::Matrix(unsigned int dimension, double coeff) {
     dim = dimension;
     this->coeff = new double[dim*dim];
 
-    for (unsigned int i=0; i < dim; i++) {
-        for (unsigned int j=0; j < dim; j++) {
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
             setCoefficient(coeff, i, j);
         }
     }
@@ -41,8 +41,8 @@ Matrix::Matrix(const Matrix &matrix) {
     dim = matrix.dim;
     coeff = new double[dim*dim];
 
-    for (unsigned int i=0; i < dim; i++) {
-        for (unsigned int j=0; j < dim; j++) {
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
             setCoefficient(matrix.getCoefficient(i, j), i, j);
         }
     }
@@ -59,11 +59,49 @@ Matrix &Matrix::operator=(const Matrix &matrix) {
         coeff = new double[matrix.dim * matrix.dim];
     }
 
-    for (unsigned int i=0; i < dim; i++) {
-        for (unsigned int j=0; j < dim; j++) {
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
             setCoefficient(matrix.getCoefficient(i, j), i, j);
         }
     }
 
     return *this;
+}
+
+void Matrix::scanMatrix(int dim) {
+    if (this->dim != dim) {
+        delete [] coeff;
+        this->dim = dim;
+        coeff = new double[dim * dim];
+    }
+
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
+            double number {0};
+
+            cout << "m[" << i << "," << j << "] = " << flush;
+            cin >> number;
+
+            setCoefficient(number, i, j);
+        }
+    }
+}
+
+void Matrix::printMatrix() const {
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
+            cout << getCoefficient(i, j) << " | ";
+        }
+        cout << endl;
+    }
+}
+
+double Matrix::trace() const {
+    double sum{0};
+
+    for (int i{0}; i < dim; i++) {
+        sum += getCoefficient(i, i);
+    }
+
+    return sum;
 }

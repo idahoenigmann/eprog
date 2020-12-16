@@ -6,6 +6,7 @@
 #define SERIE10_MATRIX_H
 
 #include <stdexcept>
+#include <iostream>
 
 class Matrix {
 public:
@@ -16,6 +17,11 @@ public:
     ~Matrix();
     Matrix(const Matrix& matrix);
     Matrix& operator=(const Matrix& matrix);
+
+    void scanMatrix(int dim);
+    void printMatrix() const;
+    double trace() const;
+
 private:
     unsigned int dim = 0;
     double* coeff = nullptr;
