@@ -27,6 +27,12 @@ public:
     double maximumAbsoluteRowSumNorm() const;
     double frobeniusNorm() const;
     double maxNorm() const;
+
+    bool isDiagonal() const;
+    bool isSymmetric() const;
+    bool isSkewSymmetric() const;
+    bool isUpperTriangular() const;
+    bool isLowerTriangular() const;
 private:
     unsigned int dim = 0;
     double* coeff = nullptr;

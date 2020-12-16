@@ -174,4 +174,62 @@ double Matrix::maxNorm() const {
     return max;
 }
 
-/* Computational complexity: n^2 */
+/* Computational complexity of norms: n^2 */
+
+bool Matrix::isDiagonal() const {
+    for (int i{0}; i < dim; i++) {
+        for (int j{0}; j < dim; j++) {
+            if (i == j) {
+                continue;
+            }
+            if (getCoefficient(i, j) != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::isSymmetric() const {
+    for (int i{0}; i < dim; i++) {
+        for (int j{0}; j < dim; j++) {
+            if (getCoefficient(i, j) != getCoefficient(j, i)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::isSkewSymmetric() const {
+    for (int i{0}; i < dim; i++) {
+        for (int j{0}; j < dim; j++) {
+            if (getCoefficient(i, j) != -(getCoefficient(j, i))) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::isUpperTriangular() const {
+    for (int i{0}; i < dim; i++) {
+        for (int j{i + 1}; j < dim; j++) {
+            if (getCoefficient(j, i) != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::isLowerTriangular() const {
+    for (int i{0}; i < dim; i++) {
+        for (int j{0}; j < i; j++) {
+            if (getCoefficient(j, i) != 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
