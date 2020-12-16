@@ -105,3 +105,73 @@ double Matrix::trace() const {
 
     return sum;
 }
+
+double Matrix::maximumAbsoluteColumnSumNorm() const {
+    double max{0};
+
+    double sum{0};
+    for (int j{0}; j < dim; j++) {
+        sum += getCoefficient(j, 0);
+    }
+
+    for(int k{1}; k < dim; k++) {
+        sum = 0;
+        for (int j{0}; j < dim; j++) {
+            sum += fabs(getCoefficient(j, k));
+        }
+        if (sum > max) {
+            max = sum;
+        }
+    }
+
+    return max;
+}
+
+double Matrix::maximumAbsoluteRowSumNorm() const {
+    double max{0};
+
+    double sum{0};
+    for (int k{0}; k < dim; k++) {
+        sum += getCoefficient(0, k);
+    }
+
+    for(int j{1}; j < dim; j++) {
+        sum = 0;
+        for (int k{0}; k < dim; k++) {
+            sum += fabs(getCoefficient(j, k));
+        }
+        if (sum > max) {
+            max = sum;
+        }
+    }
+
+    return max;
+}
+
+double Matrix::frobeniusNorm() const {
+    double sum{0};
+
+    for (int j{0}; j < dim; j++) {
+        for (int k{0}; k < dim; k++) {
+            sum += getCoefficient(j, k) * getCoefficient(j, k);
+        }
+    }
+
+    return sqrt(sum);
+}
+
+double Matrix::maxNorm() const {
+    double max{fabs(getCoefficient(0, 0))};
+
+    for (int j{0}; j < dim; j++) {
+        for (int k{0}; k < dim; k++) {
+            if (fabs(getCoefficient(j, k)) > max) {
+                max = fabs(getCoefficient(j, k));
+            }
+        }
+    }
+
+    return max;
+}
+
+/* Computational complexity: n^2 */

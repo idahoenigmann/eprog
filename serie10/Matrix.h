@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <cmath>
 
 class Matrix {
 public:
@@ -22,6 +23,10 @@ public:
     void printMatrix() const;
     double trace() const;
 
+    double maximumAbsoluteColumnSumNorm() const;
+    double maximumAbsoluteRowSumNorm() const;
+    double frobeniusNorm() const;
+    double maxNorm() const;
 private:
     unsigned int dim = 0;
     double* coeff = nullptr;

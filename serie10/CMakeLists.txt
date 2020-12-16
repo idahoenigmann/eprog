@@ -3,4 +3,6 @@ project(serie10)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(serie10 main.cpp Matrix.cpp)
+add_executable(serie10_12 main12.cpp Matrix.cpp)
+
+add_executable(serie10_3 Matrix.cpp main3.cpp)
