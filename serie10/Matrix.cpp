@@ -233,3 +233,18 @@ bool Matrix::isLowerTriangular() const {
     }
     return true;
 }
+
+Matrix::Matrix(unsigned int dimension, double lower_bound, double upper_bound) {
+    dim = dimension;
+    this->coeff = new double[dim*dim];
+
+    srand(time(NULL));
+
+    for (unsigned int i{0}; i < dim; i++) {
+        for (unsigned int j{0}; j < dim; j++) {
+            double value = (upper_bound - lower_bound) * ((double)rand() / RAND_MAX) + lower_bound;
+
+            setCoefficient(value, i, j);
+        }
+    }
+}

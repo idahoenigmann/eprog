@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 
 class Matrix {
 public:
@@ -33,6 +35,8 @@ public:
     bool isSkewSymmetric() const;
     bool isUpperTriangular() const;
     bool isLowerTriangular() const;
+
+    Matrix(unsigned int dimension, double lower_bound, double upper_bound);
 private:
     unsigned int dim = 0;
     double* coeff = nullptr;
