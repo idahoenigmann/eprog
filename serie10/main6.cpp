@@ -54,6 +54,41 @@ Vector solve(Matrix A, Vector b) {
     return solveU(A, b);
 }
 
+Vector solve2(Matrix A, Vector b) {
+
+    while(true) {
+        try {
+            return solve(A, b);
+        } catch (logic_error &error) {
+            // find col with A(x, x) == 0
+            int x{0};
+            for (; x < A.getDimension(); x++) {
+                if (A.getCoefficient(x, x) == 0) {
+                    break;
+                }
+            }
+
+            // find swap col
+            int swap_idx{0};
+            for (int i{0}; i < A.getDimension(); i++) {
+                if (fabs(A.getCoefficient(i, x)) > fabs(A.getCoefficient(swap_idx, x))) {
+                    swap_idx = i;
+                }
+            }
+            if (A.getCoefficient(swap_idx, x) == 0) {
+                throw logic_error("Pivoting does not work, as the values in a col are all 0.");
+            }
+
+            for (int i{0}; i < A.getDimension(); i++) {
+                double tmp{A.getCoefficient(i, swap_idx)};
+                A.setCoefficient(A.getCoefficient(i, x), i, swap_idx);
+                A.setCoefficient(tmp, i, x);
+            }
+        }
+    }
+
+}
+
 
 int main() {
 
@@ -88,7 +123,7 @@ int main() {
         vector[1] = 4;
 
         try {
-            Vector res{solve(matrix, vector)};
+            Vector res{solve2(matrix, vector)};
 
             for (int i{0}; i < 2; i++) {
                 cout << res[i] << ", ";
