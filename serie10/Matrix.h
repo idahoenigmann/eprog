@@ -15,6 +15,7 @@ class Matrix {
 public:
     double getCoefficient(unsigned int row, unsigned int col) const;
     void setCoefficient(double num, unsigned int row, unsigned int col);
+    unsigned int getDimension() const;
     Matrix() = default;
     Matrix(unsigned int dimension, double coeff=0);
     ~Matrix();

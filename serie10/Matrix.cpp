@@ -248,3 +248,7 @@ Matrix::Matrix(unsigned int dimension, double lower_bound, double upper_bound) {
         }
     }
 }
+
+unsigned int Matrix::getDimension() const{
+    return dim;
+}
