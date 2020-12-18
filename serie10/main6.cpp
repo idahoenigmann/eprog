@@ -35,23 +35,68 @@ Vector solveU(const Matrix& U, const Vector& b) {
 
 /* computational complexity: O(n^2) */
 
+Vector solve(Matrix A, Vector b) {
+    if (A.getDimension() != b.size()) {
+        throw logic_error("Matrix size does not match Vector size.");
+    }
+
+    for (int i{(int)A.getDimension() - 2}; i >= 0; i--) {
+        for (int k{(int)A.getDimension() - i - 1}; k > 0; k--) {
+            // Subtract k-th col to the right from current col
+            double factor{A.getCoefficient(i + k, i) / A.getCoefficient(i + k, i + k)};
+
+            for (int j{0}; j < A.getDimension(); j++) {
+                A.setCoefficient(A.getCoefficient(j, i) - A.getCoefficient(j, i+k) * factor, j, i);
+            }
+        }
+    }
+
+    return solveU(A, b);
+}
+
+
 int main() {
 
     {
        Matrix matrix;
-       matrix.scanMatrix(3);
+       //matrix.scanMatrix(3);
 
        Vector vector(3);
        vector[0] = 3;
        vector[1] = 2;
        vector[2] = 1;
 
-       Vector res{solveU(matrix, vector)};
+       try {
+           Vector res{solveU(matrix, vector)};
 
-       for (int i{0}; i < 3; i++) {
-           cout << res[i] << ", ";
+           for (int i{0}; i < 3; i++) {
+               cout << res[i] << ", ";
+           }
+           cout << endl;
+       } catch (logic_error &e) {
+            cout << e.what() << endl;
        }
-       cout << endl;
+
+    }
+
+    {
+        Matrix matrix;
+        matrix.scanMatrix(2);
+
+        Vector vector(2);
+        vector[0] = 3;
+        vector[1] = 4;
+
+        try {
+            Vector res{solve(matrix, vector)};
+
+            for (int i{0}; i < 2; i++) {
+                cout << res[i] << ", ";
+            }
+            cout << endl;
+        } catch (logic_error &e) {
+            cout << e.what() << endl;
+        }
     }
 
     return 0;

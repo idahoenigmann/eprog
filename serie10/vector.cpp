@@ -4,8 +4,6 @@ using std::cout;
 Vector::Vector() {
   dim = 0;
   coeff = (double*) 0;
-  // just for demonstration purposes
-  cout << "constructor, empty\n";
 }
 
 Vector::Vector(int dim, double init) {
@@ -20,8 +18,6 @@ Vector::Vector(int dim, double init) {
       coeff[j] = init;
     }
   }
-  // just for demonstration purposes
-  cout << "constructor, length " << dim << "\n";
 }
 
 Vector::Vector(const Vector& rhs) {
@@ -35,16 +31,12 @@ Vector::Vector(const Vector& rhs) {
       coeff[j] = rhs[j];
     }
   }
-  // just for demonstration purposes
-  cout << "copy constructor, length " << dim << "\n";
 }
 
 Vector::~Vector() {
   if (dim > 0) {
     delete[] coeff;
   }
-  // just for demonstration purposes
-  cout << "free vector, length " << dim << "\n";
 }
 
 Vector& Vector::operator=(const Vector& rhs) {
@@ -65,8 +57,6 @@ Vector& Vector::operator=(const Vector& rhs) {
       coeff[j] = rhs[j];
     }
   }
-  // just for demonstration purposes
-  cout << "deep copy, length " << dim << "\n";
   return *this;
 }
 
