@@ -13,18 +13,20 @@ int main() {
             "  \\___/_/\\_\\___|_|  \\___|_|___/\\___|  |_|\n" << endl;
 
     Polynomial p1(3, 1);
-    Polynomial p2(p1);
+    Polynomial p2(5, 2);
+    Polynomial p3(p2);
 
-    p2 = p1;
+    p3 = p1;
 
-    cout << p1.degree() << endl;
-    cout << p2.degree() << endl;
+    cout << "p1 degree: " << p1.degree() << endl;
 
-    cout << p1[1] << endl;
+    cout << "p1[1]: " << p1[1] << endl;
 
-    p1[1] = -25.5;
+    p2[3] = -25.5;
+    p2[0] = 50;
 
-    cout << p1 << endl;
+    cout << "p1: " << p1 << endl;
+    cout << "p2: " << p2 << endl;
 
     cout << "                         _            ___  \n"
             "                        (_)          |__ \\ \n"
@@ -33,9 +35,37 @@ int main() {
             " |  __/>  <  __/ | | (__| \\__ \\  __/  / /_ \n"
             "  \\___/_/\\_\\___|_|  \\___|_|___/\\___| |____|\n" << endl;
 
-    cout << p1 + p2 << endl;
-    cout << p1 + 42.314 << endl;
-    cout << 42.314 + p1 << endl;
+    cout << "p1 + p2: " << p1 + p2 << endl;
+    cout << "p1 + 42.314: " << p1 + 42.314 << endl;
+    cout << "42 + p1: " << 42 + p1 << endl;
+
+    cout << "                         _            ____  \n"
+            "                        (_)          |___ \\ \n"
+            "   _____  _____ _ __ ___ _ ___  ___    __) |\n"
+            "  / _ \\ \\/ / _ \\ '__/ __| / __|/ _ \\  |__ < \n"
+            " |  __/>  <  __/ | | (__| \\__ \\  __/  ___) |\n"
+            "  \\___/_/\\_\\___|_|  \\___|_|___/\\___| |____/ \n" << endl;
+
+    cout << "p1 * p2: " << p1 * p2 << endl;
+    cout << "p1 * 42.314: " << p1 * 42.314 << endl;
+    cout << "42 * p1: " << 42 * p1 << endl;
+
+    /* Computational complexity:
+     * O(2n) aka linear (2 for loops after another with n iterations)
+     * n = 10^2 ... 1 sec
+     * n = 10^3 ... x sec
+     * 10 sec */
+
+    cout << "                         _            _  _   \n"
+            "                        (_)          | || |  \n"
+            "   _____  _____ _ __ ___ _ ___  ___  | || |_ \n"
+            "  / _ \\ \\/ / _ \\ '__/ __| / __|/ _ \\ |__   _|\n"
+            " |  __/>  <  __/ | | (__| \\__ \\  __/    | |  \n"
+            "  \\___/_/\\_\\___|_|  \\___|_|___/\\___|    |_|  \n" << endl;
+
+    cout << boolalpha << (p1 == p2) << endl;
+    p2 = p1;
+    cout << (p1 == p2) << endl << noboolalpha;
 
     return 0;
 }

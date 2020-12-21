@@ -30,6 +30,7 @@ Polynomial& Polynomial::operator=(const Polynomial &rhs) {
     if (this != &rhs) {
         if (rhs.degree() != degree()) {
             delete[] coefficients;
+            degree_ = rhs.degree();
             coefficients = new double[degree()];
         }
         for (int i{0}; i < degree(); i++) {
@@ -57,6 +58,19 @@ double& Polynomial::operator[](unsigned int idx) {
     return coefficients[idx];
 }
 
+bool Polynomial::operator==(const Polynomial &other) {
+    if (other.degree() != degree()) {
+        return false;
+    }
+    double accuracy = 0.01;
+    for (int i{0}; i < degree(); i++) {
+        if (fabs(other[i] - (*this)[i]) > accuracy) {
+            return false;
+        }
+    }
+    return true;
+}
+
 std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     if (polynomial.degree() >= 1) {
         stream << ((polynomial[0] < 0) ? "- " : "") << fabs(polynomial[0]);
@@ -64,7 +78,7 @@ std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
             stream << ((polynomial[i] < 0) ? " - " : " + ") << fabs(polynomial[i]) << "x^" << i;
         }
     }
-    return stream << endl;
+    return stream;
 }
 
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
@@ -91,4 +105,29 @@ Polynomial operator+(const Polynomial& p, double d) {
 
 Polynomial operator+(double d, const Polynomial& p) {
     return p + d;
+}
+
+Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
+    Polynomial res(p1.degree() + p2.degree(),1);
+    for (int i{0}; i < p1.degree(); i++) {
+        res[i] *= p1[i];
+    }
+    for (int i{0}; i < p2.degree(); i++) {
+        res[i] *= p2[i];
+    }
+    return res;
+}
+
+Polynomial operator*(const Polynomial& p, double d) {
+    Polynomial res(p);
+
+    for (int i{0}; i < p.degree(); i++) {
+        res[i] *= d;
+    }
+
+    return res;
+}
+
+Polynomial operator*(double d, const Polynomial& p) {
+    return p * d;
 }

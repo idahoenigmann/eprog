@@ -23,6 +23,8 @@ public:
     double& operator[](unsigned int idx);
     const double& operator[](unsigned int idx) const;
 
+    bool operator==(const Polynomial& other);
+
 private:
     unsigned int degree_ = 0;
     double* coefficients = nullptr;
@@ -33,6 +35,10 @@ std::ostream& operator<<(std::ostream& stream, const Polynomial& polynomial);
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2);
 Polynomial operator+(const Polynomial& p, double d);
 Polynomial operator+(double d, const Polynomial& p);
+
+Polynomial operator*(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator*(const Polynomial& p, double d);
+Polynomial operator*(double d, const Polynomial& p);
 
 
 #endif //SERIE11_POLYNOMIAL_H
