@@ -71,6 +71,27 @@ bool Polynomial::operator==(const Polynomial &other) {
     return true;
 }
 
+double Polynomial::operator()(int k, double x) const {
+    Polynomial tmp{(*this)(k)};
+    return tmp(x);
+}
+
+double Polynomial::operator()(double x) const {
+    double res{0};
+    for (int i{0}; i < degree(); i++) {
+        res += (*this)[i] * x;
+    }
+    return res;
+}
+
+Polynomial Polynomial::operator()(int k) const {
+    Polynomial res(MAX(degree() - 1, 1), 0);
+    for (int i{1}; i < degree(); i++) {
+        res[i - 1] = (*this)[i] * i;
+    }
+    return res;
+}
+
 std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     if (polynomial.degree() >= 1) {
         stream << ((polynomial[0] < 0) ? "- " : "") << fabs(polynomial[0]);

@@ -25,6 +25,10 @@ public:
 
     bool operator==(const Polynomial& other);
 
+    double operator()(int k, double x) const;
+    double operator()(double x) const;
+    Polynomial operator()(int k) const;
+
 private:
     unsigned int degree_ = 0;
     double* coefficients = nullptr;
