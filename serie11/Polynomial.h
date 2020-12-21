@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cmath>
 
+#define MAX(a,b) ((a) < (b) ? (b) : (a))
+
 class Polynomial {
 public:
     Polynomial(unsigned int degree, double coefficient);
@@ -20,12 +22,17 @@ public:
 
     double& operator[](unsigned int idx);
     const double& operator[](unsigned int idx) const;
+
 private:
     unsigned int degree_ = 0;
     double* coefficients = nullptr;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Polynomial& polynomial);
+
+Polynomial operator+(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator+(const Polynomial& p, double d);
+Polynomial operator+(double d, const Polynomial& p);
 
 
 #endif //SERIE11_POLYNOMIAL_H

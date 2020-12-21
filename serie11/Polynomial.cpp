@@ -66,3 +66,29 @@ std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     }
     return stream << endl;
 }
+
+Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
+    Polynomial res(MAX(p1.degree(), p2.degree()),0);
+    for (int i{0}; i < p1.degree(); i++) {
+        res[i] += p1[i];
+    }
+    for (int i{0}; i < p2.degree(); i++) {
+        res[i] += p2[i];
+    }
+    return res;
+}
+
+Polynomial operator+(const Polynomial& p, double d) {
+    if (p.degree() >= 1) {
+        Polynomial res(p);
+
+        res[0] += d;
+        return res;
+    } else {
+        return Polynomial(1, d);
+    }
+}
+
+Polynomial operator+(double d, const Polynomial& p) {
+    return p + d;
+}
