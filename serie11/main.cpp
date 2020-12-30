@@ -103,10 +103,16 @@ int main() {
 
     //cout << "computeZero(p4): " << p4.computeZero(0, 0.1) << endl;
 
-    cout << "" << endl;
+    cout << "                         _             ___  \n"
+            "                        (_)           / _ \\ \n"
+            "   _____  _____ _ __ ___ _ ___  ___  | (_) |\n"
+            "  / _ \\ \\/ / _ \\ '__/ __| / __|/ _ \\  > _ < \n"
+            " |  __/>  <  __/ | | (__| \\__ \\  __/ | (_) |\n"
+            "  \\___/_/\\_\\___|_|  \\___|_|___/\\___|  \\___/ \n" << endl;
 
     Polynomial p5(3, "sin");
     cout << p5 << endl;
 
+    //TODO check for correctness
     return 0;
 }
