@@ -29,6 +29,8 @@ public:
     double operator()(double x) const;
     Polynomial operator()(int k) const;
 
+    double computeIntegral(double alpha, double beta) const;
+
 private:
     unsigned int degree_ = 0;
     double* coefficients = nullptr;

@@ -92,6 +92,20 @@ Polynomial Polynomial::operator()(int k) const {
     return res;
 }
 
+double Polynomial::computeIntegral(double alpha, double beta) const {
+    if (beta <= alpha) {
+        throw logic_error("Beta may not be smaller than alpha.");
+    }
+
+    double res{0};
+
+    for (int i{0}; i < degree(); i++) {
+        res += (*this)[i] * (pow(beta, i + 1) - pow(alpha, i + 1)) / (i + 1);
+    }
+
+    return res;
+}
+
 std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     if (polynomial.degree() >= 1) {
         stream << ((polynomial[0] < 0) ? "- " : "") << fabs(polynomial[0]);

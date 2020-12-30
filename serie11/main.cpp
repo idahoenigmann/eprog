@@ -78,5 +78,10 @@ int main() {
     cout << "p2^2: " << p2(2) << endl;
     cout << "p2^2(1): " << p2(2, 1) << endl;
 
+    cout << "" << endl;
+
+    cout << "p2: " << p2 << endl;
+    cout << "computeIntegral(p2): " << p2.computeIntegral(0, 1) << endl;
+
     return 0;
 }
