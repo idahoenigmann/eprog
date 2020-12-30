@@ -106,6 +106,76 @@ double Polynomial::computeIntegral(double alpha, double beta) const {
     return res;
 }
 
+double Polynomial::computeZero(double x0, double tau) const {
+    if (tau <= 0) {
+        throw logic_error("Tau must be bigger than 0.");
+    }
+    double last_x{};
+    double x{x0};
+    while (true) {
+        last_x = x;
+        x = last_x - (*this)(last_x) / (*this)(1, last_x);
+
+        if (fabs((*this)(x)) <= tau) {
+            break;
+        }
+        if (fabs(x - last_x) <= tau) {
+            break;
+        }
+    }
+    return x;
+}
+
+Polynomial::Polynomial(unsigned int degree, const std::string& function) {
+    degree_ = degree;
+    this->coefficients = new double[degree];
+
+    int function_type{};
+
+    if (function == "sin") {
+        function_type = 0;
+    } else if (function == "cos") {
+        function_type = 1;
+    } else if (function == "exp") {
+        function_type = 4;
+    } else {
+        throw logic_error("function must be either sin, cos or exp.");
+    }
+
+    for (int i{0}; i < degree; i++) {
+        double factorial{1};
+        for (int j{1}; j < i; j++) {
+            factorial *= j;
+        }
+
+        double f0{};
+
+        switch (function_type) {
+            case 0: // sin
+                f0 = 0;
+                function_type++;
+                break;
+            case 1: // cos
+                f0 = 1;
+                function_type++;
+                break;
+            case 2: // - sin
+                f0 = 0;
+                function_type++;
+                break;
+            case 3: // - cos
+                f0 = -1;
+                function_type = 0;
+                break;
+            case 4: // exp
+                f0 = 1;
+                break;
+        }
+
+        (*this)[i] = f0 / factorial;
+    }
+}
+
 std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     if (polynomial.degree() >= 1) {
         stream << ((polynomial[0] < 0) ? "- " : "") << fabs(polynomial[0]);

@@ -31,6 +31,10 @@ public:
 
     double computeIntegral(double alpha, double beta) const;
 
+    double computeZero(double x0, double tau) const;
+
+    Polynomial(unsigned int degree, const std::string& function);
+
 private:
     unsigned int degree_ = 0;
     double* coefficients = nullptr;
