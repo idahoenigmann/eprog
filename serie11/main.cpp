@@ -95,13 +95,13 @@ int main() {
             " |  __/>  <  __/ | | (__| \\__ \\  __/   / /   \n"
             "  \\___/_/\\_\\___|_|  \\___|_|___/\\___|  /_/    \n" << endl;
 
-    Polynomial p4(3, 0);
+    Polynomial p4(3, 1);
     p4[1] = 4;
     p4[2] = 2;
     cout << p4 << endl;
     cout << p4(1) << endl;
 
-    //cout << "computeZero(p4): " << p4.computeZero(0, 0.1) << endl;
+    cout << "computeZero(p4): " << p4.computeZero(0, 0.1) << endl;
 
     cout << "                         _             ___  \n"
             "                        (_)           / _ \\ \n"

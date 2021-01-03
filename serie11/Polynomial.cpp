@@ -78,17 +78,21 @@ double Polynomial::operator()(int k, double x) const {
 
 double Polynomial::operator()(double x) const {
     double res{0};
+    
     for (int i{0}; i < degree(); i++) {
-        res += (*this)[i] * x;
+        res += (*this)[i] * pow(x, i);
     }
+    
     return res;
 }
 
 Polynomial Polynomial::operator()(int k) const {
     Polynomial res(MAX(degree() - 1, 1), 0);
+    
     for (int i{1}; i < degree(); i++) {
         res[i - 1] = (*this)[i] * i;
     }
+    
     return res;
 }
 
@@ -127,7 +131,7 @@ double Polynomial::computeZero(double x0, double tau) const {
 }
 
 Polynomial::Polynomial(unsigned int degree, const std::string& function) {
-    degree_ = degree;
+    this->degree_ = degree;
     this->coefficients = new double[degree];
 
     int function_type{};
