@@ -98,8 +98,7 @@ int main() {
     Polynomial p4(3, 1);
     p4[1] = 4;
     p4[2] = 2;
-    cout << p4 << endl;
-    cout << p4(1) << endl;
+    cout << "p4: " << p4 << endl;
 
     cout << "computeZero(p4): " << p4.computeZero(0, 0.1) << endl;
 
@@ -113,6 +112,8 @@ int main() {
     Polynomial p5(3, "sin");
     cout << p5 << endl;
 
-    //TODO check for correctness
+    Polynomial p6(1, "exp");
+    cout << p6 << endl;
+
     return 0;
 }

@@ -8,8 +8,8 @@ using namespace std;
 
 Polynomial::Polynomial(unsigned int degree, double coefficient) {
     this->degree_ = degree;
-    this->coefficients = new double[degree];
-    for(int i{0}; i < degree; i++) {
+    this->coefficients = new double[this->degree() + 1];
+    for(int i{0}; i < this->degree() + 1; i++) {
         (*this)[i] = coefficient;
     }
 }
@@ -20,8 +20,8 @@ Polynomial::~Polynomial() {
 
 Polynomial::Polynomial(const Polynomial &other) {
     this->degree_ = other.degree();
-    this->coefficients = new double[degree()];
-    for(int i{0}; i < degree(); i++) {
+    this->coefficients = new double[degree() + 1];
+    for(int i{0}; i < degree() + 1; i++) {
         (*this)[i] = other[i];
     }
 }
@@ -31,9 +31,9 @@ Polynomial& Polynomial::operator=(const Polynomial &rhs) {
         if (rhs.degree() != degree()) {
             delete[] coefficients;
             degree_ = rhs.degree();
-            coefficients = new double[degree()];
+            coefficients = new double[degree() + 1];
         }
-        for (int i{0}; i < degree(); i++) {
+        for (int i{0}; i < degree() + 1; i++) {
             (*this)[i] = rhs[i];
         }
     }
@@ -45,14 +45,14 @@ unsigned int Polynomial::degree() const {
 }
 
 const double& Polynomial::operator[](unsigned int idx) const {
-    if (idx >= degree()) {
+    if (idx >= degree() + 1) {
         throw logic_error("Index out of bound.");
     }
     return coefficients[idx];
 }
 
 double& Polynomial::operator[](unsigned int idx) {
-    if (idx >= degree()) {
+    if (idx >= degree() + 1) {
         throw logic_error("Index out of bound.");
     }
     return coefficients[idx];
@@ -63,7 +63,7 @@ bool Polynomial::operator==(const Polynomial &other) {
         return false;
     }
     double accuracy = 0.01;
-    for (int i{0}; i < degree(); i++) {
+    for (int i{0}; i < degree() + 1; i++) {
         if (fabs(other[i] - (*this)[i]) > accuracy) {
             return false;
         }
@@ -79,7 +79,7 @@ double Polynomial::operator()(int k, double x) const {
 double Polynomial::operator()(double x) const {
     double res{0};
     
-    for (int i{0}; i < degree(); i++) {
+    for (int i{0}; i < degree() + 1; i++) {
         res += (*this)[i] * pow(x, i);
     }
     
@@ -87,13 +87,16 @@ double Polynomial::operator()(double x) const {
 }
 
 Polynomial Polynomial::operator()(int k) const {
+    if (k == 0) {
+        return *this;
+    }
     Polynomial res(MAX(degree() - 1, 1), 0);
     
-    for (int i{1}; i < degree(); i++) {
+    for (int i{1}; i < degree() + 1; i++) {
         res[i - 1] = (*this)[i] * i;
     }
     
-    return res;
+    return res(k - 1);
 }
 
 double Polynomial::computeIntegral(double alpha, double beta) const {
@@ -103,7 +106,7 @@ double Polynomial::computeIntegral(double alpha, double beta) const {
 
     double res{0};
 
-    for (int i{0}; i < degree(); i++) {
+    for (int i{0}; i < degree() + 1; i++) {
         res += (*this)[i] * (pow(beta, i + 1) - pow(alpha, i + 1)) / (i + 1);
     }
 
@@ -132,7 +135,7 @@ double Polynomial::computeZero(double x0, double tau) const {
 
 Polynomial::Polynomial(unsigned int degree, const std::string& function) {
     this->degree_ = degree;
-    this->coefficients = new double[degree];
+    this->coefficients = new double[this->degree() + 1];
 
     int function_type{};
 
@@ -146,7 +149,7 @@ Polynomial::Polynomial(unsigned int degree, const std::string& function) {
         throw logic_error("function must be either sin, cos or exp.");
     }
 
-    for (int i{0}; i < degree; i++) {
+    for (int i{0}; i < this->degree() + 1; i++) {
         double factorial{1};
         for (int j{1}; j < i; j++) {
             factorial *= j;
@@ -183,7 +186,7 @@ Polynomial::Polynomial(unsigned int degree, const std::string& function) {
 std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
     if (polynomial.degree() >= 1) {
         stream << ((polynomial[0] < 0) ? "- " : "") << fabs(polynomial[0]);
-        for (int i{1}; i < polynomial.degree(); i++) {
+        for (int i{1}; i < polynomial.degree() + 1; i++) {
             stream << ((polynomial[i] < 0) ? " - " : " + ") << fabs(polynomial[i]) << "x^" << i;
         }
     }
@@ -192,10 +195,10 @@ std::ostream& operator<<(ostream &stream, const Polynomial& polynomial) {
 
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
     Polynomial res(MAX(p1.degree(), p2.degree()),0);
-    for (int i{0}; i < p1.degree(); i++) {
+    for (int i{0}; i < p1.degree() + 1; i++) {
         res[i] += p1[i];
     }
-    for (int i{0}; i < p2.degree(); i++) {
+    for (int i{0}; i < p2.degree() + 1; i++) {
         res[i] += p2[i];
     }
     return res;
@@ -208,7 +211,7 @@ Polynomial operator+(const Polynomial& p, double d) {
         res[0] += d;
         return res;
     } else {
-        return Polynomial(1, d);
+        return Polynomial(0, d);
     }
 }
 
@@ -218,10 +221,10 @@ Polynomial operator+(double d, const Polynomial& p) {
 
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
     Polynomial res(p1.degree() + p2.degree(),1);
-    for (int i{0}; i < p1.degree(); i++) {
+    for (int i{0}; i < p1.degree() + 1; i++) {
         res[i] *= p1[i];
     }
-    for (int i{0}; i < p2.degree(); i++) {
+    for (int i{0}; i < p2.degree() + 1; i++) {
         res[i] *= p2[i];
     }
     return res;
@@ -230,7 +233,7 @@ Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
 Polynomial operator*(const Polynomial& p, double d) {
     Polynomial res(p);
 
-    for (int i{0}; i < p.degree(); i++) {
+    for (int i{0}; i < p.degree() + 1; i++) {
         res[i] *= d;
     }
 

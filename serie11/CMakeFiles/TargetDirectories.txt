@@ -1,3 +1,0 @@
-/home/ida/Desktop/eprog/serie11/CMakeFiles/rebuild_cache.dir
-/home/ida/Desktop/eprog/serie11/CMakeFiles/edit_cache.dir
-/home/ida/Desktop/eprog/serie11/CMakeFiles/serie11.dir

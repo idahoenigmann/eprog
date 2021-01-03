@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/serie11.dir/main.cpp.o CMakeFiles/serie11.dir/Polynomial.cpp.o  -o serie11 
