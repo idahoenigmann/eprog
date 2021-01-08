@@ -149,10 +149,11 @@ Polynomial::Polynomial(unsigned int degree, const std::string& function) {
         throw logic_error("function must be either sin, cos or exp.");
     }
 
+    double factorial{1};
+
     for (int i{0}; i < this->degree() + 1; i++) {
-        double factorial{1};
-        for (int j{1}; j < i; j++) {
-            factorial *= j;
+        if (i != 0) {
+            factorial *= i;
         }
 
         double f0{};

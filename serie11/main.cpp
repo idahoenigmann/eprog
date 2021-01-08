@@ -54,7 +54,7 @@ int main() {
      * O(2n) aka linear (2 for loops after another with n iterations)
      * n = 10^2 ... 1 sec
      * n = 10^3 ... x sec
-     * 10 sec */
+     * 100 sec */
 
     cout << "                         _            _  _   \n"
             "                        (_)          | || |  \n"
