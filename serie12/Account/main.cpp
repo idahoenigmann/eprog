@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Account.h"
+#include "Bank.h"
 
 using namespace std;
 
@@ -33,6 +34,15 @@ int main() {
     } catch (logic_error& e) {
         cout << e.what() << endl;
     }
+
+    Bank bank;
+    bank.addAccount(a);
+    bank.addAccount(b);
+    bank.addAccount(c);
+
+    bank.updateAccount();
+
+    //bank.closeAccount(2);
 
     return 0;
 }

@@ -52,6 +52,11 @@ void Account::print() const {
     cout << "account number: " << account_number << "; balance: " << balance << endl;
 }
 
+void Account::update() {
+    cout << "hello" << endl;
+    this->chargeFee();
+}
+
 void SavingsAccount::addInterest() {
     balance *= (1 + interest_rate);
 }
@@ -71,6 +76,11 @@ SavingsAccount::SavingsAccount(double interestRate) {
 void SavingsAccount::print() const {
     cout << "account number: " << account_number << "; balance: " << balance;
     cout << "; interest rate: " << interest_rate << endl;
+}
+
+void SavingsAccount::update() {
+    Account::update();
+    addInterest();
 }
 
 CurrentAccount::CurrentAccount(double overdraft) {
@@ -94,4 +104,11 @@ void CurrentAccount::withdraw(double sum) {
 void CurrentAccount::print() const {
     cout << "account number: " << account_number << "; balance: " << balance;
     cout << "; overdraft: " << overdraft << endl;
+}
+
+void CurrentAccount::update() {
+    Account::update();
+    if (balance < 0) {
+        cout << "warning: account " << account_number << " has a negative balance." << endl;
+    }
 }

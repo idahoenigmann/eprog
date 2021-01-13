@@ -22,6 +22,8 @@ public:
     void chargeFee();
     virtual void print() const;
 
+    virtual void update();
+
 protected:
     int account_number{};
     double balance{};
@@ -40,6 +42,8 @@ public:
     double getInterestRate() const;
 
     void print() const override;
+
+    void update() override;
 protected:
     double interest_rate{};
 };
@@ -51,6 +55,8 @@ public:
 
     void withdraw(double sum) override;
     void print() const override;
+
+    void update() override;
 protected:
     double overdraft{};
 };
