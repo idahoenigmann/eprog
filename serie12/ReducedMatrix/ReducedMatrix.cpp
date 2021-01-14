@@ -102,7 +102,7 @@ const double &SymmetricMatrix::operator()(int row, int col) const {
     }
 }
 
-double SymmetricMatrix::powerIteration(double tau) {
+double SymmetricMatrix::powerIteration(double tau) const {
     if (tau <= 0) {
         throw logic_error("tau may not be smaller than 0.");
     }
@@ -121,8 +121,8 @@ double SymmetricMatrix::powerIteration(double tau) {
         }
     }
 
-    double curr_lambda{};
-    double last_lambda{};
+    double curr_lambda{0};
+    double last_lambda{0};
 
     while (true) {
         // calculate norm
@@ -132,7 +132,7 @@ double SymmetricMatrix::powerIteration(double tau) {
         }
         norm = sqrt(norm);
 
-        // x = x / norm
+        // x = A*last_x / norm
         // last_x = x
         for (int i{}; i < size(); i++) {
             x[i] = x[i] / norm;
@@ -141,9 +141,11 @@ double SymmetricMatrix::powerIteration(double tau) {
 
         // x = A * x
         for (int i{}; i < size(); i++) {
+            double tmp{};
             for (int j{}; j < size(); j++) {
-                x[i] += (*this)(i, j) * x[j];
+                tmp += (*this)(i, j) * x[j];
             }
+            x[i] = tmp;
         }
 
         last_lambda = curr_lambda;
@@ -153,7 +155,7 @@ double SymmetricMatrix::powerIteration(double tau) {
         }
 
         // calculate norm of difference of ax and lambda * x
-        // diff = x - lambda * last_x
+        // diff = (A*last_x) - lambda * last_x
         norm = 0;
         for (int i{}; i < size(); i++) {
             norm += (x[i] - curr_lambda * last_x[i]) * (x[i] - curr_lambda * last_x[i]);
@@ -161,15 +163,14 @@ double SymmetricMatrix::powerIteration(double tau) {
         norm = sqrt(norm);
 
         if (norm <= tau) {
-            break;
-        }
-        if (fabs(curr_lambda) <= tau) {
-            if (fabs(last_lambda - curr_lambda) <= tau) {
-                break;
-            }
-        } else {
-            if (fabs(last_lambda - curr_lambda) <= tau * fabs(curr_lambda)) {
-                break;
+            if (fabs(curr_lambda) <= tau) {
+                if (fabs(last_lambda - curr_lambda) <= tau) {
+                    break;
+                }
+            } else {
+                if (fabs(last_lambda - curr_lambda) <= tau * fabs(curr_lambda)) {
+                    break;
+                }
             }
         }
     }

@@ -54,7 +54,7 @@ public:
     double& operator()(int row, int col) override;
     const double& operator()(int row, int col) const override;
 
-    double powerIteration(double tau);
+    double powerIteration(double tau) const;
 };
 
 #endif //SERIE12_REDUCEDMATRIX_H

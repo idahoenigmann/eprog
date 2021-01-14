@@ -31,13 +31,20 @@ int main() {
 
     cout << sm.size() << endl;
 
-    tmp = 1;
+    /*tmp = 1;
     for (int i{0}; i < 3; i++) {
         for (int j{0}; j <= i; j++) {
             sm(i, j) = tmp;
             tmp++;
         }
-    }
+    }*/
+
+    sm(0, 0) = 1;
+    sm(1, 0) = 0;
+    sm(1, 1) = 1;
+    sm(2, 0) = 0;
+    sm(2, 1) = 0;
+    sm(2, 2) = 1;
 
     for (int i{0}; i < 3; i++) {
         for (int j{0}; j < 3; j++) {
@@ -46,7 +53,7 @@ int main() {
         cout << endl;
     }
 
-    sm.powerIteration(0.1);
+    cout << sm.powerIteration(0.001) << endl;
 
     return 0;
 }
