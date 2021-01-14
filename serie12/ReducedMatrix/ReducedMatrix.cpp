@@ -79,3 +79,25 @@ const double &LowerTriangularMatrix::operator()(int row, int col) const {
     }
     return (*this)[(row) * (row + 1) / 2 + (col)];
 }
+
+double &SymmetricMatrix::operator()(int row, int col) {
+    if (row >= size() || col >= size()) {
+        throw logic_error("index out of bound");
+    }
+    if (row < col) {
+        return (*this)[(col) * (col + 1) / 2 + (row)];
+    } else {
+        return (*this)[(row) * (row + 1) / 2 + (col)];
+    }
+}
+
+const double &SymmetricMatrix::operator()(int row, int col) const {
+    if (row >= size() || col >= size()) {
+        throw logic_error("index out of bound");
+    }
+    if (row < col) {
+        return (*this)[(col) * (col + 1) / 2 + (row)];
+    } else {
+        return (*this)[(row) * (row + 1) / 2 + (col)];
+    }
+}

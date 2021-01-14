@@ -16,7 +16,7 @@ public:
     ReducedMatrix(unsigned int coeffLen, double value=0);
     ReducedMatrix(const ReducedMatrix&);
     virtual ~ReducedMatrix();
-    ReducedMatrix& operator=(const ReducedMatrix& rhs);
+    virtual ReducedMatrix& operator=(const ReducedMatrix& rhs);
     int size() const;
 
     virtual double& operator()(int row, int col) = 0;
@@ -42,6 +42,16 @@ public:
 private:
     double zero{0};
     const double const_zero{0};
+};
+
+class SymmetricMatrix : public ReducedMatrix {
+public:
+    SymmetricMatrix() : ReducedMatrix() {};
+    SymmetricMatrix(unsigned int coeffLen, double value=0): ReducedMatrix(coeffLen, value) {};
+    SymmetricMatrix(const SymmetricMatrix& rhs) : ReducedMatrix(rhs) {};
+
+    double& operator()(int row, int col) override;
+    const double& operator()(int row, int col) const override;
 };
 
 #endif //SERIE12_REDUCEDMATRIX_H
