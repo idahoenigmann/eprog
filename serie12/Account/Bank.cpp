@@ -13,7 +13,7 @@ void Bank::updateAccount() {
 }
 
 void Bank::addAccount(Account& account) {
-    accounts.push_back(make_shared<Account>(account));
+    accounts.push_back(&account);
 }
 
 void Bank::closeAccount(int account_number) {

@@ -18,7 +18,7 @@ public:
     void closeAccount(int account_number);
     void updateAccount();
 private:
-    std::vector<std::shared_ptr<Account>> accounts;
+    std::vector<Account*> accounts;
 };
 
 
