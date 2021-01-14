@@ -27,33 +27,43 @@ int main() {
         cout << endl;
     }
 
-    SymmetricMatrix sm(3);
+    SymmetricMatrix sm1(3);
+    SymmetricMatrix sm2(3);
 
-    cout << sm.size() << endl;
+    cout << sm1.size() << endl;
 
-    /*tmp = 1;
+    tmp = 1;
     for (int i{0}; i < 3; i++) {
         for (int j{0}; j <= i; j++) {
-            sm(i, j) = tmp;
+            sm1(i, j) = tmp;
             tmp++;
         }
-    }*/
+    }
 
-    sm(0, 0) = 1;
-    sm(1, 0) = 0;
-    sm(1, 1) = 1;
-    sm(2, 0) = 0;
-    sm(2, 1) = 0;
-    sm(2, 2) = 1;
+    sm2(0, 0) = 1;
+    sm2(1, 0) = 0;
+    sm2(1, 1) = 1;
+    sm2(2, 0) = 0;
+    sm2(2, 1) = 0;
+    sm2(2, 2) = 1;
 
     for (int i{0}; i < 3; i++) {
         for (int j{0}; j < 3; j++) {
-            cout << sm(i, j) << ", ";
+            cout << sm2(i, j) << ", ";
         }
         cout << endl;
     }
 
-    cout << sm.powerIteration(0.001) << endl;
+    cout << sm2.powerIteration(0.001) << endl;
+
+    LowerTriangularMatrix cholesky {sm2.computeCholesky()};
+
+    for (int i{0}; i < cholesky.size(); i++) {
+        for (int j{0}; j < cholesky.size(); j++) {
+            cout << cholesky(i, j) << ", ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
