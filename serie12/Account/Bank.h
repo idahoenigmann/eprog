@@ -6,6 +6,7 @@
 #define SERIE12_BANK_H
 
 #include <vector>
+#include <memory>
 #include "Account.h"
 
 class Bank {
@@ -17,7 +18,7 @@ public:
     void closeAccount(int account_number);
     void updateAccount();
 private:
-    std::vector<Account*> accounts;
+    std::vector<std::shared_ptr<Account>> accounts;
 };
 
 

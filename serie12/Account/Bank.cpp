@@ -4,6 +4,8 @@
 
 #include "Bank.h"
 
+using namespace std;
+
 void Bank::updateAccount() {
     for (int i{0}; i < accounts.size(); i++) {
         accounts.at(i)->update();
@@ -11,11 +13,11 @@ void Bank::updateAccount() {
 }
 
 void Bank::addAccount(Account& account) {
-    accounts.push_back(&account);
+    accounts.push_back(make_shared<Account>(account));
 }
 
 void Bank::closeAccount(int account_number) {
-    for (auto i{accounts.size() - 1}; i >= 0; i--) {
+    for (int i{(int)accounts.size() - 1}; i >= 0; i--) {
         if (accounts.at(i)->get_account_number() == account_number) {
             accounts.erase(accounts.begin() + i);
         }

@@ -53,7 +53,6 @@ void Account::print() const {
 }
 
 void Account::update() {
-    cout << "hello" << endl;
     this->chargeFee();
 }
 

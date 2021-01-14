@@ -38,11 +38,18 @@ int main() {
     Bank bank;
     bank.addAccount(a);
     bank.addAccount(b);
+    bank.addAccount(a);
     bank.addAccount(c);
 
     bank.updateAccount();
 
-    //bank.closeAccount(2);
+    bank.closeAccount(3);
+
+    a.print();
+
+    bank.closeAccount(1);
+
+    a.print();
 
     return 0;
 }
