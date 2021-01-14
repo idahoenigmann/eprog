@@ -46,5 +46,7 @@ int main() {
         cout << endl;
     }
 
+    sm.powerIteration(0.1);
+
     return 0;
 }

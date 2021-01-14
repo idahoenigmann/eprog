@@ -101,3 +101,78 @@ const double &SymmetricMatrix::operator()(int row, int col) const {
         return (*this)[(row) * (row + 1) / 2 + (col)];
     }
 }
+
+double SymmetricMatrix::powerIteration(double tau) {
+    if (tau <= 0) {
+        throw logic_error("tau may not be smaller than 0.");
+    }
+
+    double last_x[size()];
+    for (int i{}; i < size(); i++) {
+        last_x[i] = 1;
+    }
+
+    double x[size()];
+
+    // x = A * last_x
+    for (int i{}; i < size(); i++) {
+        for (int j{}; j < size(); j++) {
+            x[i] += (*this)(i, j) * last_x[j];
+        }
+    }
+
+    double curr_lambda{};
+    double last_lambda{};
+
+    while (true) {
+        // calculate norm
+        double norm{};
+        for (int i{}; i < size(); i++) {
+            norm += x[i] * x[i];
+        }
+        norm = sqrt(norm);
+
+        // x = x / norm
+        // last_x = x
+        for (int i{}; i < size(); i++) {
+            x[i] = x[i] / norm;
+            last_x[i] = x[i];
+        }
+
+        // x = A * x
+        for (int i{}; i < size(); i++) {
+            for (int j{}; j < size(); j++) {
+                x[i] += (*this)(i, j) * x[j];
+            }
+        }
+
+        last_lambda = curr_lambda;
+        curr_lambda = 0;
+        for (int i{}; i < size(); i++) {
+            curr_lambda += last_x[i] * x[i];
+        }
+
+        // calculate norm of difference of ax and lambda * x
+        // diff = x - lambda * last_x
+        norm = 0;
+        for (int i{}; i < size(); i++) {
+            norm += (x[i] - curr_lambda * last_x[i]) * (x[i] - curr_lambda * last_x[i]);
+        }
+        norm = sqrt(norm);
+
+        if (norm <= tau) {
+            break;
+        }
+        if (fabs(curr_lambda) <= tau) {
+            if (fabs(last_lambda - curr_lambda) <= tau) {
+                break;
+            }
+        } else {
+            if (fabs(last_lambda - curr_lambda) <= tau * fabs(curr_lambda)) {
+                break;
+            }
+        }
+    }
+
+    return curr_lambda;
+}

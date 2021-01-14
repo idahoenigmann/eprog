@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <math.h>
 
 class ReducedMatrix {
 public:
@@ -52,6 +53,8 @@ public:
 
     double& operator()(int row, int col) override;
     const double& operator()(int row, int col) const override;
+
+    double powerIteration(double tau);
 };
 
 #endif //SERIE12_REDUCEDMATRIX_H
